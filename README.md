@@ -26,6 +26,9 @@ Sales Flow: customers -> sales -> sale_items -> donuts.
 Stock Flow: purchases -> ingred_stock -> donut_ingreds -> donuts.
 Logging: All movements are linked to inventory_logs via sale_id, donut_id, or ingred_id.
 
+### Database ER Diagram
+![Shop Management ER Diagram](Er_diagram_for_DS.png)
+
 You must read the design.txt file for a better understanding. Actually, all tables, procedures, and triggers have their short documentation there.
 
 # About Me:
