@@ -1,37 +1,94 @@
-## Shop Management DBMS - PostgreSQL
-Hello, this is a simple DBMS built in PostgreSQL.
+#### **Donut Shop Management System (Database Module)**
+  A comprehensive, schema-based PostgreSQL database architecture designed for managing a donut business.\
+  This system integrates inventory tracking, human resources, and sales management with high data integrity and automated business logic.
 
-This is a simple and fun project for testing my SQL skill and knowledge.
-This project is a first step—it's the backend for a coming up Python CLI project.
-This simple DBMS is fully relational; it's managed by PROCEDURES and TRIGGERS.
-Procedures and triggers make this simple project more efficient and robust.
+#### **📁 Folder Structure**
 
-# Why procedure and triggers
-Actually, when you try to use Python for insert/update operations, it takes many resources. It uses more RAM and memory as well. But procedures and triggers solve this effectively. For inserting and updating in tables, using procedures and triggers can be up to 100 times faster than doing it through Python.
+```donut_shop/
+│
+├── database/                # SQL source files
+│   ├── schemas/             # Custom types and schema definitions
+│   │   └── create_schemas.sql
+│   ├── inventory/           # Inventory management (Tables, Procedures, Triggers)
+│   ├── hr/                  # Employee and payroll management
+│   ├── sales/               # Customer transactions and billing
+│   └── tests.sql            # Test cases and dummy data
+│
+└── src/                     # Python source code (Coming Soon)
+```
 
-# 📊 System Overview
-The system consists of **14 tables**, **18 procedures**, and **5 triggers**.
+### 🏗 **Database Architecture**
+The system is divided into three primary schemas to ensure modularity and security:
+  
+  * **Inventory**: Tracks ingredients, donuts, suppliers, and stock levels.
+  * **HR**: Manages employee roles, shifts, and salary disbursements.
+  * **Sales**: Handles customer data, order processing, and payments.
 
-# 🛠️ Core Modules:
-Employee Management: Handles roles and staff data (job_roles, employees).
-Inventory & Products: Manages ingredients, stock levels, and recipes (ingredients, ingred_stock, donut_ingreds, donuts).
-Supply Chain: Tracks suppliers and raw material purchases (suppliers, purchases).
-Sales & Logistics: Manages customer orders and cancellations (customers, sales, sale_items, canceled_sale_items).
-Audit & Monitoring: Automated logs for every stock change and low-stock alerts (inventory_logs, warnings).
+#### **Key Stats**:
+  * Tables: 25
+  * Procedures: 32
+  * Triggers: 9
 
-# 🔗 Relationships & Architecture:
-The system follows a strict relational model. Key connections include:
+#### **🚀 Key Features & Implementation Logic**
+##### **1. Why Server-Side Logic (Procedures & Triggers)?**
+\
+  Instead of handling all logic via Python (Pandas/Polars), this project prioritizes Database-Level Logic for the following reasons:
 
-Sales Flow: customers -> sales -> sale_items -> donuts.
-Stock Flow: purchases -> ingred_stock -> donut_ingreds -> donuts.
-Logging: All movements are linked to inventory_logs via sale_id, donut_id, or ingred_id.
+  * **Data Integrity**: Triggers like ingred_stock_update ensure that inventory is updated automatically whenever a sale occurs, preventing human error or application-level bugs.
 
-### Database ER Diagram
-![Shop Management ER Diagram](Er_diagram_for_DS.png)
+  * **Security**: Business rules (like price change logs or employee shift history) are enforced at the source, making it impossible to bypass them via external scripts.
 
-You must read the design.txt file for a better understanding. Actually, all tables, procedures, and triggers have their short documentation there.
+  * **Performance**: By using stored procedures, we reduce the number of network trips between Python and the database, executing complex operations directly on the server. 
+\
 
-# About Me:
-My name is Jisan.
-I am a student of Data Science.
-Currently, I am learning Math, Python, and SQL.
+#### **2. Inventory Intelligence**
+  * **Stock Warnings**: An automated warning system alerts when ingredient levels fall below the min_required_level.
+  * **Price Tracking**: Comprehensive history tables for both ingredients and donuts to track inflation and pricing trends over time.
+  * **Waste Logging**: Dedicated tracking for damaged or expired goods to ensure accurate financial reporting.
+
+\
+#### **3. Sales & Financial Integrity**
+  * **Payment Validation**: The is_payment_complete procedure ensures no order is marked successful without full payment.
+
+  * **Soft Deletion**: Customers and employees are never permanently deleted; instead, an act_stat flag is used to preserve historical data for future Data Science analysis.
+
+  * **Automated Billing**: sale_items triggers calculate sub-totals and totals automatically upon insertion.
+
+\
+#### **4. Human Resource Management**
+  * **Shift & Salary Tracking**: Automated logging of any changes in employee shifts or salary structures.
+  * **Secure Access**: Procedures for credential verification with return codes for application-level handling.
+
+\
+### **🛠 Tech Stack & Upcoming Features**
+  * **Core Database**: PostgreSQL
+  * **Business Logic**: PL/pgSQL (Procedures, Functions, Triggers)
+  * **Planned CLI Application**: A Python-based Command Line Interface is currently in development to interact with this database.
+  * **C-Language Integration (Security)**: For enhanced security, a custom hashing algorithm written in C will be used to hash and verify passwords, ensuring that sensitive data is never stored in plain text.
+
+### **📈 Future Data Science Goals**
+\
+
+The database is designed with Data Science in mind. The extensive logging (Price history, Waste logs, Sales trends) allows for:
+
+  * Predictive inventory management using Python.
+  * Sales forecasting and customer behavior analysis.
+  * Cost-benefit analysis of specific donut categories.
+
+  
+   ---
+
+## 📊 Entity Relationship (ER) Diagram
+  ![Database ER Diagram](./Er_diagram_png.png)
+  *This diagram represents the logical relationships between the Inventory, HR, and Sales schemas.*
+  ---
+  
+## 👤 About Me
+  
+  My name is **Jisan** and my goal is to become a Data Scientist & Assembly Programmer
+  *   **Focus:** Data Science, System-level Programming (C/Assembly/Rust), and Backend Architecture.
+  *   **Goal:** Building high-performance, data-driven systems with a deep understanding of hardware and software integration.
+  *   **Goal Progress:** Currently I am learning **Math**, **Data Analysis with SQL & Python** and **C program for ASM**.
+  
+  ---
+  *This project main goal is to check my python and postgreSQL skill.*
