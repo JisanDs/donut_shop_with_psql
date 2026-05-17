@@ -244,10 +244,22 @@
 -- DECLARE
 --     v_sale_id INT;
 --     v_total DECIMAL;
+--     full_total DECIMAL;
 -- BEGIN
 --     CALL generate_sale_id('+4930123456', 3, v_sale_id);
+
 --     CALL record_items(v_sale_id, 1, 2, v_total);
---     CALL cancel_item(v_sale_id, 1, 'damaged');
+--     RAISE NOTICE '1. total: %', v_total;
+
+--     full_total := v_total;
+
+--     CALL record_items(v_sale_id,2, 2, v_total);
+--     full_total := full_total + v_total;
+
+--     RAISE NOTICE '1 full total %', full_total;
+
+--     CALL cancel_item(v_sale_id, 2, 'damaged', full_total);
+--     RAISE NOTICE 'Total sale price: %', full_total;
 -- END;
 -- $$;
 
@@ -311,20 +323,20 @@
 /*
     let's get user password
 */
-DO $$
-DECLARE
-    v_passwd TEXT;
-    v_return_code INT;
-BEGIN
-    CALL get_passwd(3, 'hans_m_dev', v_passwd, v_return_code);
+-- DO $$
+-- DECLARE
+--     v_passwd TEXT;
+--     v_return_code INT;
+-- BEGIN
+--     CALL get_passwd(3, 'hans_m_dev', v_passwd, v_return_code);
 
-    IF v_return_code = 0 THEN
-        RAISE NOTICE 'Customer password: %', v_passwd;
-    ELSE
-        RAISE EXCEPTION 'Password not found return code %', v_return_code;
-    END IF;
-END;
-$$;
+--     IF v_return_code = 0 THEN
+--         RAISE NOTICE 'Customer password: %', v_passwd;
+--     ELSE
+--         RAISE EXCEPTION 'Password not found return code %', v_return_code;
+--     END IF;
+-- END;
+-- $$;
 
 
 

@@ -87,10 +87,6 @@
 --         RAISE EXCEPTION 'Invalid id ingred_id: % not exists', g_ingred_id;
 --     END IF;
 
---     IF g_quantity <= 0 THEN
---         RAISE EXCEPTION 'Quantity can not be less then or equal to zero, you gave: %', g_quantity;
---     END IF;
-
 --     INSERT INTO inventory.donut_ingreds(donut_id, ingred_id, ingred_quantity_needed)
 --     VALUES (g_donut_id, g_ingred_id, g_quantity);
 
@@ -198,27 +194,27 @@
 -- END
 
 
-CREATE OR REPLACE PROCEDURE inventory.record_waste(
-    g_donut_id INT,
-    g_quantity INT
-)
-LANGUAGE plpgsql
-AS $$
-BEGIN
-    PERFORM 1 FROM donuts WHERE donut_id = g_donut_id;
-    IF NOT FOUND THEN
-        RAISE EXCEPTION 'Invalid donut_id % not found.', g_donut_id;
-    END IF;
+-- CREATE OR REPLACE PROCEDURE inventory.record_waste(
+--     g_donut_id INT,
+--     g_quantity INT
+-- )
+-- LANGUAGE plpgsql
+-- AS $$
+-- BEGIN
+--     PERFORM 1 FROM donuts WHERE donut_id = g_donut_id;
+--     IF NOT FOUND THEN
+--         RAISE EXCEPTION 'Invalid donut_id % not found.', g_donut_id;
+--     END IF;
 
-    INSERT INTO inventory.waste_logs(donut_id, quantity)
-    VALUES (g_donut_id, g_quantity);
+--     INSERT INTO inventory.waste_logs(donut_id, quantity)
+--     VALUES (g_donut_id, g_quantity);
 
-    UPDATE donuts SET quantity = quanity - g_quantity
-    WHERE donut_id = g_donut_id;
+--     UPDATE donuts SET quantity = quantity - g_quantity
+--     WHERE donut_id = g_donut_id;
 
-    COMMIT;
-END;
-$$;
+--     COMMIT;
+-- END;
+-- $$;
 
 
 
@@ -277,7 +273,8 @@ $$;
 
 -- CREATE OR REPLACE PROCEDURE inventory.get_donut_price(
 --     g_donut_id INT,
---     v_price OUT DECIMAL
+--     v_price OUT DECIMAL,
+--     v_stat_code OUT INT
 -- )
 -- LANGUAGE plpgsql
 -- AS $$
@@ -285,8 +282,10 @@ $$;
 --     SELECT price INTO v_price FROM inventory.donuts WHERE donut_id = g_donut_id;
 
 --     IF NOT FOUND THEN
---         RAISE EXCEPTION 'Invalid donut_id % not exists.', g_donut_id;
+--         v_stat_code := 1;
 --     END IF;
+
+--     v_stat_code := 0;
 -- END;
 -- $$;
 

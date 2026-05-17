@@ -14,7 +14,7 @@
     This table containt employees shifts like morning, day
 
     for add shifts use
-    :CALL add_shift(g_name Shifts, g_start_item time_s, g_end_time time_s)
+    :CALL add_shift(g_name Shifts, g_start_time time_s, g_end_time time_s)
     g_name: name of shift must between ('morning', 'day'), 
     g_start_item: start time must between ('9 AM', '2 PM'), 
     g_end_time: end time must between ('2 PM', '10 PM')

@@ -28,6 +28,29 @@
     the table content all value from sale_items.
 
 
+### **analysis_view**:
+#### This simple views use to generate daly_sale_report, monthly_sale_report etc.
+
+  #### **daily_total_report**:
+    This view show you daly total sale report like total_customer, total_saled_donuts, total_income.
+
+  #### **daily_sale_report_by_donut**:
+    This view show sale report this show 4 columns name, customer_count, total_saled, total_amount.
+
+    columns:
+      name          : name of the donut,
+      customer_count: how many customer buy this donut,
+      total_saled   : how many donuts are saled,
+      total_amount  : total amount
+
+  #### **sale_status_by_month**:
+    This view show week and monthly report, this show donut_id, name, total_saled, week, month      
+  
+  #### **cancel_item_report**:
+    This view show cancel item or product report with reason. Using this view you can find way this sales are canceled.
+    this show name, total_cancellations, total_canceled_quantity, total_lost_revenue, reason, month
+  
+
 
 ### ***Procedures***:
 
@@ -85,7 +108,7 @@
     g_reason  : reason must between ('restock', 'add', 'damaged'),
     g_quantity: how many quantity you want to increace or decreace. NOT: for increace you need to pass only number like 9,3 etc
                 but decreace you neet to pass with - operatore like -3, -29 etc.
-    v_sub_total: this is return new price after increace of decreace
+    v_sub_total: this is return new total price after increace or decreace
 
 
   #### ***cancel_item***:
@@ -93,10 +116,11 @@
     The procedure also record change in inventory_logs table.
 
     Syntax:
-    :CALL cancel_item(g_sale_id INT, g_donut_id INT, g_reason reasons)
+    :CALL cancel_item(g_sale_id INT, g_donut_id INT, g_reason reasons, v_new_total OUT DECIMAL)
     g_sale_id: sale_id customre sale id,
     g_donut_id: which donut customer want to exclud,
     g_reason : reason must between ('restock', 'damaged')
+    v_sub_total: this is return new total price after cancel item
 
 
   #### ***cancel_sale***:

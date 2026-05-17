@@ -54,6 +54,16 @@
 -- LANGUAGE plpgsql
 -- AS $$
 -- BEGIN
+--     PERFORM 1 FROM job_roles WHERE role_id = g_role_id;
+--     IF NOT FOUND THEN
+--         RAISE EXCEPTION 'Invalid role_id % not found', g_role_id;
+--     END IF;
+
+--     PERFORM 1 FROM shifts WHERE shift_id = g_shift_id;
+--     IF NOT FOUND THEN
+--         RAISE EXCEPTION 'Invalid shift_id % not found', g_shift_id;
+--     END IF;
+
 --     IF g_age < 18 THEN
 --         RAISE EXCEPTION 'age % less then 18 are not allowed', g_age;
 --     ELSE
@@ -83,6 +93,11 @@
 --     IF NOT FOUND THEN
 --         RAISE EXCEPTION 'Invalid employee_id % not found', g_employee_id;
 --     END IF;
+
+    -- PERFORM 1 FROM shifts WHERE shift_id = g_new_shift_id;
+    -- IF NOT FOUND THEN
+    --     RAISE EXCEPTION 'Invalid shift_id % not found', g_new_shift_id;
+    -- END IF;
 
 --     UPDATE hr.employees
 --     SET shift_id = g_new_shift_id
@@ -143,44 +158,44 @@
 -- $$;
 
 
-CREATE OR REPLACE PROCEDURE hr.delete_employee(
-    g_employee_id INT,
-    g_username TEXT
-)
-LANGUAGE plpgsql
-AS $$
-BEGIN
-    PERFORM 1 FROM hr.employees
-    WHERE employee_id = g_employee_id AND username = g_username;
+-- CREATE OR REPLACE PROCEDURE hr.delete_employee(
+--     g_employee_id INT,
+--     g_username TEXT
+-- )
+-- LANGUAGE plpgsql
+-- AS $$
+-- BEGIN
+--     PERFORM 1 FROM hr.employees
+--     WHERE employee_id = g_employee_id AND username = g_username;
 
-    IF NOT FOUND THEN
-        RAISE EXCEPTION 'Invalid: employee_id or oter details are wrong';
-    END IF;
+--     IF NOT FOUND THEN
+--         RAISE EXCEPTION 'Invalid employee_id or username';
+--     END IF;
 
-    UPDATE hr.employees SET act_stat = false
-    WHERE employee_id = g_employee_id AND username = g_username;
+--     UPDATE hr.employees SET act_stat = false
+--     WHERE employee_id = g_employee_id AND username = g_username;
 
-    COMMIT;
-END;
-$$;
+--     COMMIT;
+-- END;
+-- $$;
 
 
-CREATE OR REPLACE PROCEDURE hr.get_employee_passwd(
-    g_employee_id INT,
-    g_username TEXT,
-    v_passwd OUT TEXT,
-    v_return_code OUT INT
-)
-LANGUAGE plpgsql
-AS $$
-BEGIN
-    SELECT password INTO v_passwd FROM hr.employees
-    WHERE username = g_username AND employee_id = g_employee_id;
+-- CREATE OR REPLACE PROCEDURE hr.get_employee_passwd(
+--     g_employee_id INT,
+--     g_username TEXT,
+--     v_passwd OUT TEXT,
+--     v_return_code OUT INT
+-- )
+-- LANGUAGE plpgsql
+-- AS $$
+-- BEGIN
+--     SELECT password INTO v_passwd FROM hr.employees
+--     WHERE username = g_username AND employee_id = g_employee_id;
 
-    IF NOT FOUND THEN
-        v_return_code := 1;
-    ELSE
-        v_return_code := 0;
-    END IF;
-END;
-$$;
+--     IF NOT FOUND THEN
+--         v_return_code := 1;
+--     ELSE
+--         v_return_code := 0;
+--     END IF;
+-- END;
+-- $$;
