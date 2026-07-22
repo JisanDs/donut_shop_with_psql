@@ -1,159 +1,162 @@
-# 🍩 Donut Shop Management System (Hybrid Module)
+# 🍩 Donut Shop Enterprise Management System & Analytics Pipeline
 
-This repository contains a schema-based PostgreSQL database engine paired with a modular Python backend.\
-The primary objective of this project is to benchmark and demonstrate proficiency \
-in **Advanced Relational Database Design**, **Server-Side Automation (Procedures/Triggers)**, \
-and **Object-Oriented Python Integration** using `psycopg` connection pooling.
+This repository contains an end-to-end relational database platform paired with an object-oriented Python backend and a real-time Streamlit analytical dashboard. 
 
-Rather than processing transactional mechanics at the application level, \
-this project enforces a **Database-First Philosophy** to guarantee maximum data integrity, immutability, and raw server-side performance.
+The primary objective of this project is to showcase production-grade software engineering, featuring **Advanced Relational Database Design**, **Server-Side Transaction Automation (Stored Procedures & Triggers)**, **Compiled C Native Extensions**, and a **High-Performance In-Memory Analytics Pipeline** utilizing Polars, ConnectorX, and Plotly.
 
 ---
 
-## 📁 Project Folder Structure
+## **🏗️ System Architecture Overview**
 
 ```text
+┌────────────────────────────────────────────────────────────────────────┐
+│                        ANALYTICAL DASHBOARD LAYER                      │
+│        Streamlit Multi-Page UI | Plotly Express Visualizations         │
+└───────────────────────────────────▲────────────────────────────────────┘
+                                    │ Memory Transfer (Arrow)
+┌───────────────────────────────────┴────────────────────────────────────┐
+│                    HIGH-SPEED ANALYTICAL PIPELINE                      │
+│       Polars DataFrames | SQL Query Offloading | ConnectorX Engine     │
+└───────────────────────────────────▲────────────────────────────────────┘
+                                    │ ConnectorX / Psycopg Pool
+┌───────────────────────────────────┴────────────────────────────────────┘
+│                   TRANSACTION & DATABASE ENGINE (PostgreSQL)           │
+│   25 Tables | 32 Stored Procedures | 9 Triggers | 3 Isolated Schemas   │
+└───────────────────────────────────▲────────────────────────────────────┘
+                                    │ Ctypes Interop
+┌───────────────────────────────────┴────────────────────────────────────┘
+│                     NATIVE CRYPTOGRAPHIC ENGINE                        │
+│             Compiled C Shared Library (hasher.so) via ctypes           │
+└────────────────────────────────────────────────────────────────────────┘
+```
+
+The system is built on a Database-First Philosophy to guarantee ACID compliance, immutability, and transactional data integrity at the storage layer, while offloading high-speed aggregations to an in-memory execution pipeline.
+
+
+# **📁 Repository Structure**
+```
 donut_shop/
 ├── README.md
-├── database/                    # SQL Database Layer
-│   ├── plan.md                  # Database design blueprints & structural specifications
-│   ├── schemas/                 # Custom domain types and schema boundaries
-│   │   └── create_schemas.sql
-│   ├── inventory/               # Tables, Procedures, and Triggers for Stock tracking
-│   ├── hr/                      # Employee profiles, shift management, and Payroll logs
-│   ├── sales/                   # Customers, Orders, Payments, and Analytics Views
-│   └── tests.sql                # This file containt procedures tests data
-│                    
+├── data_for_analysis/              # Generated CSV datasets for benchmarking & dashboarding
+├── database/                       # Relational Storage Engine
+│   ├── plan.md                     # Schema blueprints and structural constraints
+│   ├── tests.sql                   # Unit test scripts for procedures and triggers
+│   ├── schemas/
+│   │   └── create_schemas.sql      # Custom domain types and namespace boundaries
+│   ├── inventory/                  # Tables, procedures, and triggers for stock control
+│   ├── hr/                         # Employee profiles, shifts, and payroll audit logs
+│   └── sales/                      # Orders, payments, discounts, and analytical views
 │
-└── src/                         # Python Application Layer
-    ├── plan.md                  # Detailed Python plan & runtime workflow
-    ├── process_sale.py          # Script simulating transactional point-of-sale workflows
-    ├── simple_report.py         # Main operational file executing BI analysis view scripts
-    ├── hasher_src/              # Low-level cryptographic security module
-    │   └── hash.c               # Native C source file for memory-efficient password hashing
-    └── services/                # Modular library package
-        ├── __init__.py          # API gateway exposing core classes
-        ├── dBconnect.py         # Thread-safe Connection Pool Manager
-        ├── all_service.py       # Python mapping structures invoking DB procedures
-        ├── hasher.so            # Compiled C Shared Object mapped via ctypes
-        └── py_utils.py          # Regex data validators and foreign function binders
+├── dashboard/                      # Real-time Streamlit & Polars Analytical System
+│   ├── main.py                     # Entry point for multi-page dashboard execution
+│   ├── src/                        # Data processing & aggregation logic
+│   │   ├── sales_revenue_ana.py    # Analytical transformations for sales and discounts
+│   │   ├── inv_manage_waste.py     # Supply chain, stock thresholds, and waste metrics
+│   │   └── hr_analysis.py          # Workforce demographics, shifts, and salary trends
+│   └── pages/                      # User Interface & Plotly Visualization Layer
+│       ├── sales_revenue_page.py   # Sales & Revenue dashboard view
+│       ├── inv_manage_waste_page.py# Inventory & Waste Management view
+│       ├── hr_status_page.py       # HR & Employee Analytics view
+│       ├── user_guide_page.py      # Dynamic markdown documentation renderer
+│       └── USER_GUIDE.md           # User documentation source
+│
+└── src/                            # Python Application & Service Integration Layer
+    ├── plan.md                     # Application layer execution pipeline specs
+    ├── process_sale.py             # Transactional point-of-sale workflow simulator
+    ├── simple_report.py            # CLI-based operational BI report runner
+    ├── hasher_src/                 # Low-level native C security module
+    │   └── hash.c                  # Native C code for fast, memory-safe hashing
+    └── services/                   # Modular Python service package
+        ├── __init__.py             # API gateway exposing core services
+        ├── dBconnect.py            # Thread-safe Psycopg connection pool manager
+        ├── all_service.py          # Python wrappers invoking PostgreSQL procedures
+        ├── hasher.so               # Compiled C shared object mapped via ctypes
+        └── py_utils.py             # Regex validators and C function wrappers
 ```
 
-**💡 Important Engineering Guide:** To thoroughly analyze the structural design, constraints, and operational design patterns of this project, please read database/plan.md and src/plan.md. Every module and relational entity is fully documented within their respective directories.
+# **⚡ Engineering & Compute Optimization Strategy**
+This system is explicitly designed to minimize cloud compute costs, memory overhead, and network latencies:
+
+### **1. Zero-Auto-Refresh Architecture (Cost & Compute Reduction)**
+* Traditional Streamlit dashboards re-execute the entire Python script on every user interaction, causing continuous database polling and spiking server CPU/RAM usage.
+
+* Controlled Execution: This dashboard rejects reactive auto-polling. Instead, data extraction is isolated behind an explicit Manual Data Refresh Button.
+
+* On-Demand Processing: Queries execute and cache in memory only when requested, drastically cutting database connection costs and computing overhead.
+
+### **2. Offloaded Query Processing (SQL + Polars Pipeline)**
+* ConnectorX Engine: Data extraction utilizes connectorx, streaming PostgreSQL binary protocols directly into memory without Python object overhead.
+
+* Database Offloading: Relational joins (JOIN ... USING) are executed on the database engine. 
+Mathematical aggregations, conditional statements (pl.when().then()), and time-series group-bys are processed via Polars leveraging parallel Rust multi-threading.
+
+### **3. Database-Level Business Invariants**
+* Automated Stock Deduction: Server-side triggers (ingred_stock_update) instantly decrement raw ingredients upon transactional order insertion, eliminating concurrency race conditions.
+
+* Audit-Proof Logs: Salary revisions, shift changes, and product price mutations append to immutable historical tracking tables.
+
+### **4. Low-Level Native C Cryptographic Integration**
+* Heavy hashing algorithms are compiled from hash.c to hasher.so. Python interfaces with the compiled binary through ctypes bindings, offloading cryptographic parsing from the Python interpreter to native machine instructions.
 
 
-🏗️ Core Architecture & System Logic
-### **1. Enforced Database-Level Logic**
-Core business invariants are protected directly inside PostgreSQL using 32 Stored Procedures and 9 Triggers over 25 Tables:
+# **📊 Dashboard Modules & Feature Breakdown**
+The analytical UI provides operational visibility across three core enterprise domains:
 
-**Data Integrity:** Whenever a transaction is updated, server-side triggers (ingred_stock_update) instantly decrement raw ingredients, eliminating synchronization mismatches.
+### **1. Sale & Revenue Analysis**
+* KPI Summary: Total Quantity Sold, Total Net Profit, and Top Sold Donut.
 
-**Audit Control:** Changes to employee wage history, shift patterns, or product pricing are captured immutably at the storage engine level, making them tamper-proof against application-level exploits.
+* Comparative Pricing Metrics: Evaluates revenue performance per donut type under active discount promotions vs. standard retail pricing.
 
-**Network Efficiency:** Multi-step transactional chains execute natively on the server block, reducing costly round-trip communication delays between Python and the database cluster.
+* Interactive Temporal Filtering: Isolates daily transaction logs and generated revenue by month.
 
+* Visualizations: Line charts for monthly sales trends, Scatter Plots mapping total spending vs. unit profit, and Donut Charts analyzing category profit margins.
 
-### 2. High-Performance Hybrid Integration
-**Connection Pooling:** Uses an optimized ConnectionPool pipeline featuring explicit autocommit transaction tuning to avoid overhead and ensure safe, rapid connection cycling.
+### **2. Inventory & Waste Management**
+* KPI Summary: Aggregate Procurement Expenditure, Total Waste Volume, and Financial Loss Value.
 
-**The Native C Bridge:** Heavy cryptographic computations are handled off-cpu by compiling a native C file (hash.c) into a shared library (hasher.so). Python leverages ctypes bindings to feed password strings into the library, mapping high-speed numerical hashes to database profiles.
+* Supply Chain Tracking: Procurement history audit trails breaking down unit costs, total expenditure, and supplier distribution.
 
+* Threshold Monitoring: Dual-color Bar Charts comparing live ingredient stock levels against safety inventory requirements.
 
-### **🛠️ Python Service Layer API Documentation**
-#### **1. dBconnect.py (Database Connectivity Driver)**
-**DBConnect(username, passwd):** Configures security profiles.
+* Waste Analytics: Monthly waste logs tracking discarded units and financial impact per product.
 
-**connect_db():** Spawns the system-wide active connection pool.
+### **3. HR & Workforce Status**
+* KPI Summary: Total Active Headcount, Aggregate Payroll Budget, and Average Employee Compensation.
 
-**get_conn():** Yields an isolated live database handle, fully compatible with context managers.
+* Workforce Audit: Profile listings with dynamic role-based filters and audit trails of recent payroll disbursements.
 
-**close_conn():** Disposes of active sockets during graceful engine shutdowns.
-
-```
-# Context Manager Connection Pattern:
-from services import SetUpConnection
-from psycopg.rows import dict_row
-
-conn = SetUpConnection("postgres", "secure_password")
-conn.connect_db()
-try:
-    with conn.get_conn() as ctn:
-        with ctn.cursor(row_factory=dict_row) as cur:
-            cur.execute("SELECT name FROM inventory.donuts LIMIT 1")
-            print(cur.fetchone()['name'])
-finally:
-    conn.close_conn()
-```
-
-
-### **2. all_service.py (Enterprise Service Mapping)**
-#### **📦 Inventory Class**
-* **add_ingred(name, unit_name, price) / add_categorie(name) / add_donut(...):** Seeds base master entities. Units are constrained to custom types like kg, gm, or box.
-
-* **connect_ingred_donut(donut_id, ingred_id, quantity):** Builds multi-table mapping properties required for processing custom recipes.
-
-* **add_ingred_stock_requirment(ingred_id, min_requir_level):** Establishes a minimum safe volume index to trigger automated low-stock conditions.
-
-* **purchase_from(...) / record_waste(...):** Evaluates supply chain intake and tracks structural inventory write-offs.
-
-* **change_ingred_price() / change_donut_price():** Mutates current price states while logging the chronological shifts into auditing backup tables.
-
-
-### **👥 HR Class**
-* **add_job(role, base_salary) / add_shift(...) / add_employee(...):** Provisions staff records. Validates structural constraints like age restrictions ($>18$), binds financial routers (bank/m_bk), and assigns protected C-hashes.
-
-* **change_emp_shift() / change_emp_salary():** Updates workforce properties and appends current tracking entries.
-
-* **pay_salary(employee_id, role_id):** Logs monthly execution records for corporate wage compliance.
-
-* **delete_employee(employee_id, username):** Employs a defensive Soft Delete (act_stat = false) rule, safeguarding chronological human behavior records for data pipeline ingestion.
-
-
-### **🛒 Sales Class**
-* **add_customer(...) / delete_customer(...):** Provisions client account vectors with age barriers ($>15$).
-
-* **generate_sale_id(...):** Instantiates a stateful order context, returning a transactional unique token index.
-
-* **record_items(sale_id, donut_id, quantity):** Appends order elements to live carts and evaluates precise row calculations.
-
-* **record_payment(sale_id, payment_method, amount):** Binds checkout mechanisms to cash, m_bk (Mobile Banking), or crd (Card). Returns 0 for clean clearances, and 1 for incomplete balances.
-
-* **cancel_item() / cancel_sale():** Discards individual entries or drops full invoices, using triggers to instantly re-balance shelf products.
-
-
-#### **3. py_utils.py (Regular Expression & Dynamic Interop Utilities)**
-* is_email(email): Validates email strings against technical formatting criteria.
-
-* is_valid_passwd(passwd): Blocks structural risks via strict lookaheads (enforces alpha-numeric variations, mixed casing, and explicitly prevents the word "password").
-
-* make_hash(passwd): Marshals incoming Python text primitives into compiled native machine memory spaces for instant parsing by hasher.so
-
-
----
-### **📊 Business Intelligence & Operational Views**
-The simple_report.py file queries targeted database analytics views, handling terminal alignment strings ({:<X}) and protective fallback handling safely without relying on thick UI dependencies:
-
-**1. Daily Total Report:** Aggregates total unique consumer traffic, aggregate donut products shipped, and gross transactional incoming value for the day.
-
-**2. Daily Sale by Donut Report:** Extracts unit volumes and distinct revenue streams indexed by product types.
-
-**3. Sale Status by Month Report:** Isolates product trends grouped across weekly and monthly temporal metrics.
-
-**4. Cancel Report:** Monitors customer friction variables by computing instances of dropped goods, processing underlying reasons, and reporting lost capital values.
+* Demographics & Distribution: Shift capacity bar charts, employee age distribution histograms, onboarding trends, and monthly salary disbursement metrics.
 
 
 
-## 👤 About Me
 
-  **My name is **Jisan** and my goal is to become a Data Scientist & Assembly Programmer.**
+# **🛠️ Data Infrastructure & Generation Note**
+* The dataset located in data_for_analysis/ was synthetically generated specifically for benchmarking this dashboard pipeline.
 
-  *   **Focus:** Data Science, System-level Programming (C/Assembly/Rust), and Backend Architecture.
+* Ingestion Strategy: During bulk dataset insertion, server-side transactional triggers and procedures were temporarily bypassed to populate raw schema structures cleanly for analytical stress-testing.
 
-  *   **Goal:** Building high-performance, data-driven systems with a deep understanding of hardware and software integration.
+* Production Extensibility: In a live enterprise environment with continuous transactional volume, the pipeline easily scales to support auto-refresh streaming, heatmap analytical views, and deeper cohort analysis (daily/yearly temporal aggregation charts).
 
-  *   **Goal Progress:** Currently I am learning **Math**, **Data Analysis with SQL & Python** and **C program for ASM**.
+# **💡 Developer Notes & Customization**
+* This project was developed as a comprehensive engineering exercise combining system programming, database design, and high-performance data analytics.
+
+* If you are analyzing or adapting this codebase:
+
+* Explore database/plan.md for full relational schema specs and procedure signatures.
+
+* Review src/plan.md for application layer workflows and Python service mappings.
+
+* Feel free to extend the Polars transformations or add advanced analytical visualizations (e.g., Correlation Heatmaps, Demand Forecasting) based on your operational requirements.
+
 
 
 ---
 
-*This project main goal is to check my python and postgreSQL skill.*
+## 👤 Author & Background
+
+**Jisan**  
+*Data Science Student & Systems Programming Enthusiast*
+
+* **Current Focus:** Learning Data Science and Systems Programming (C / Rust / Assembly) with a focus on building efficient, low-compute software pipelines.
+* **Philosophy:** Studying C, Assembly, and CS fundamentals to understand hardware execution, memory management, and optimization. The goal is to apply these low-level insights toward building resource-friendly Machine Learning and Analytics systems in the future.
+* **Technical Stack:** Python (Polars, Streamlit, Psycopg), PostgreSQL (PL/pgSQL), C, Rust, SQL, and Mathematics (Linear Algebra & Calculus).
