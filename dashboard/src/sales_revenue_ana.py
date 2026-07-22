@@ -2,7 +2,7 @@ import streamlit as st
 import polars as pl
 
 
-URL = "postgresql://root:panda908jisan@127.0.0.1:5432/donut_shop"
+URL = "postgresql://username:password@127.0.0.1:5432/donut_shop"
 
 
 def load_data_from_db(query: str):
