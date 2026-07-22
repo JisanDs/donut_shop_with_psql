@@ -3,10 +3,11 @@
     Every schema have his owne diractory and every dir containt plan.md file.
 */
 
--- create DB change current db to donut_shop.
-CREATE DATABASE donut_shop;
+-- create database
+-- CREATE DATABASE donut_shop;
 
-create schemas
+-- create DB change current db to donut_shop.
+-- create schemas
 CREATE SCHEMA inventory;
 CREATE SCHEMA hr;
 CREATE SCHEMA sales;

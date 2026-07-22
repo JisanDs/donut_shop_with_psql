@@ -26,7 +26,7 @@ CREATE TABLE inventory.donuts(
 CREATE TABLE inventory.donut_ingreds(
     donut_id INT,
     ingred_id INT,
-    ingred_quantity_needed DECIMAL(5,10) NOT NULL,
+    ingred_quantity_needed DECIMAL(5,4) NOT NULL,
     FOREIGN KEY(donut_id) REFERENCES inventory.donuts(donut_id) ON DELETE CASCADE,
     FOREIGN KEY(ingred_id) REFERENCES inventory.ingredients(ingred_id) ON DELETE CASCADE
 );
