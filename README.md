@@ -128,6 +128,7 @@ The analytical UI provides operational visibility across three core enterprise d
 * Demographics & Distribution: Shift capacity bar charts, employee age distribution histograms, onboarding trends, and monthly salary disbursement metrics.
 
 
+**For more information about dashboard check ./dashboard/pages/USER_GUIDE.md file**
 
 
 # **🛠️ Data Infrastructure & Generation Note**
