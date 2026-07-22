@@ -1,0 +1,5 @@
+supplier_id,name,phone,location
+1,NYC Bakery Supplies Inc.,"{+12125559900,+12125559901}","{""state"": ""NY"", ""city"": ""New York"", ""street"": ""450 7th Ave"", ""zip"": ""10123""}"
+2,Empire Dairy & Eggs Co.,"{+17185558811}","{""state"": ""NY"", ""city"": ""Brooklyn"", ""street"": ""120 2nd St"", ""zip"": ""11215""}"
+3,Atlantic Sweeteners Ltd.,"{+15165557722}","{""state"": ""NY"", ""city"": ""Long Island"", ""street"": ""88 Sunrise Hwy"", ""zip"": ""11501""}"
+4,Green Planet Organic Foods,"{+12015556633}","{""state"": ""NJ"", ""city"": ""Jersey City"", ""street"": ""75 Montgomery St"", ""zip"": ""07302""}"

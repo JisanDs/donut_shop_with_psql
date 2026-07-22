@@ -1,0 +1,5 @@
+warn_id,table_name,donut_id,ingred_id,massage,warn_date
+1,donuts,1,,Warning: Glazed Ring Classic quantity drops below critical level.,2026-05-20
+2,ingred_stock,,3,Warning: Organic Whole Milk stock level below minimum required.,2026-05-12
+3,donuts,2,,Warning: Chocolate Frosted batch running low in counter.,2026-06-10
+4,ingred_stock,,6,Warning: Belgian Chocolate stock alert!,2026-06-02

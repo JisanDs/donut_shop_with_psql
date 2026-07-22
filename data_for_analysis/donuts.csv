@@ -1,0 +1,11 @@
+donut_id,cat_id,name,is_gluten_free,price,quantity
+1,1,Glazed Ring Classic,false,1.99,120
+2,1,Chocolate Frosted,false,2.25,95
+3,2,Old Fashioned Sour Cream,false,2.10,80
+4,2,Blueberry Cake Donut,false,2.40,65
+5,3,Boston Cream Pie,false,2.99,50
+6,3,NYC Strawberry Jelly,false,2.75,60
+7,4,Pumpkin Spice Glaze,false,3.25,45
+8,4,Red Velvet Crumb,false,3.50,40
+9,5,Gluten-Free Vanilla Dip,true,3.99,30
+10,5,Vegan Matcha Delight,true,4.25,25

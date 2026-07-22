@@ -1,0 +1,13 @@
+employee_id,role_id,shift_id,current_salary,name,username,age,email,phone,password,account,account_company,account_type,location,act_stat,join_date
+1,3,1,6800,David Miller,david_mgr,34,david@donut.com,"{+12125550144}",pass123,998877665,Chase_Bank,bank,"{""city"": ""New York"", ""zone"": ""Manhattan"", ""zip"": ""10001""}",true,2025-01-10
+2,1,1,4600,John Doe,john_chef1,28,john@donut.com,"{+12125550155,+12125550156}",pass123,112233445,Bank_of_America,bank,"{""city"": ""New York"", ""zone"": ""Brooklyn"", ""zip"": ""11201""}",true,2025-03-15
+3,1,2,4500,Robert Smith,robert_chef2,26,robert@donut.com,"{+16465550199}",pass123,robert.pay,PayPal,m_bk,"{""city"": ""New York"", ""zone"": ""Queens"", ""zip"": ""11101""}",true,2025-06-20
+4,2,1,3900,Emily Watson,emily_cash1,24,emily@donut.com,"{+17185550122}",pass123,223344556,Wells_Fargo,bank,"{""city"": ""New York"", ""zone"": ""Bronx"", ""zip"": ""10451""}",true,2025-08-01
+5,2,2,3800,Sarah Jenkins,sarah_cash2,23,sarah@donut.com,"{+15165550133}",pass123,sarah.venmo,Venmo,m_bk,"{""city"": ""New York"", ""zone"": ""Manhattan"", ""zip"": ""10011""}",true,2025-11-12
+6,4,1,3300,Michael Brown,michael_sale1,22,michael@donut.com,"{+13475550188}",pass123,michael.cash,CashApp,m_bk,"{""city"": ""New York"", ""zone"": ""Brooklyn"", ""zip"": ""11215""}",true,2026-01-05
+7,4,1,3200,James Wilson,james_sale2,25,james@donut.com,"{+12125550177}",pass123,556677889,Citibank,bank,"{""city"": ""New York"", ""zone"": ""Staten Island"", ""zip"": ""10301""}",true,2026-02-10
+8,4,2,3200,Jessica Taylor,jessica_sale3,21,jessica@donut.com,"{+16465550166}",pass123,jessica.venmo,Venmo,m_bk,"{""city"": ""New York"", ""zone"": ""Queens"", ""zip"": ""11372""}",true,2026-02-15
+9,4,2,3200,Kevin Davies,kevin_sale4,27,kevin@donut.com,"{+17185550111}",pass123,889900112,Capital_One,bank,"{""city"": ""New York"", ""zone"": ""Manhattan"", ""zip"": ""10019""}",true,2026-03-01
+10,4,1,3200,Daniel Evans,daniel_sale5,29,daniel@donut.com,"{+15165550100}",pass123,daniel.pay,PayPal,m_bk,"{""city"": ""New York"", ""zone"": ""Brooklyn"", ""zip"": ""11222""}",false,2025-05-01
+11,1,2,4700,Amanda Clark,amanda_chef3,30,amanda@donut.com,"{+13475550123}",pass123,334455667,Chase_Bank,bank,"{""city"": ""New York"", ""zone"": ""Queens"", ""zip"": ""11432""}",true,2025-02-18
+12,2,1,3800,Brian Thomas,brian_cash3,26,brian@donut.com,"{+12125550189}",pass123,brian.cash,CashApp,m_bk,"{""city"": ""New York"", ""zone"": ""Manhattan"", ""zip"": ""10002""}",true,2025-09-25

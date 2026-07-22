@@ -1,0 +1,6 @@
+customer_id,name,username,age,email,phone,password,location,act_stat,join_date
+1,Alex Morgan,alex_m,28,alex.m@gmail.com,"{+12125550190}",pass123,"{""city"": ""New York"", ""zone"": ""Manhattan"", ""zip"": ""10002""}",true,2026-05-01
+2,Taylor Swift,taylor_s,32,taylor.s@yahoo.com,"{+16465550211,+16465550212}",pass123,"{""city"": ""New York"", ""zone"": ""Tribeca"", ""zip"": ""10013""}",true,2026-05-10
+3,Jordan Peterson,jordan_p,45,jordan.p@outlook.com,"{+17185550233}",pass123,"{""city"": ""New York"", ""zone"": ""Brooklyn"", ""zip"": ""11201""}",true,2026-05-20
+4,Chris Evans,chris_e,29,chris.e@gmail.com,"{+13475550255}",pass123,"{""city"": ""New York"", ""zone"": ""Queens"", ""zip"": ""11102""}",true,2026-06-01
+5,Emma Stone,emma_s,26,emma.s@gmail.com,"{+15165550277}",pass123,"{""city"": ""New York"", ""zone"": ""Bronx"", ""zip"": ""10451""}",false,2026-06-15

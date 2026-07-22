@@ -1,0 +1,16 @@
+log_id,donut_id,sale_id,ingred_id,changed_table,change_amount,reason,log_date
+1,1,1,,donuts,-5,sale,2026-05-05
+2,2,1,,donuts,-2,sale,2026-05-05
+3,3,2,,donuts,-4,sale,2026-05-06
+4,5,3,,donuts,-6,sale,2026-05-12
+5,6,3,,donuts,-4,sale,2026-05-12
+6,,,1,ingred_stock,-75,sale,2026-05-05
+7,,,2,ingred_stock,-25,sale,2026-05-05
+8,1,4,,donuts,-10,sale,2026-05-20
+9,7,5,,donuts,-3,sale,2026-05-25
+10,8,6,,donuts,-5,sale,2026-06-02
+11,9,6,,donuts,-2,sale,2026-06-02
+12,2,7,,donuts,-12,sale,2026-06-10
+13,10,8,,donuts,-4,sale,2026-06-15
+14,5,9,,donuts,3,restock,2026-06-22
+15,1,4,,donuts,2,restock,2026-05-21

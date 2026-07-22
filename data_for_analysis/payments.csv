@@ -1,0 +1,13 @@
+transaction_id,sale_id,payment_method,amount,payment_status,paid_date
+1,1,cash,5.00,completed,2026-05-05 10:15:00
+2,1,bank,9.45,completed,2026-05-05 10:16:00
+3,2,cash,8.40,completed,2026-05-06 14:20:00
+4,3,m_bk,28.94,completed,2026-05-12 11:05:00
+5,4,bank,19.90,completed,2026-05-20 16:40:00
+6,5,cash,9.75,completed,2026-05-25 09:30:00
+7,6,cash,10.00,completed,2026-06-02 12:00:00
+8,6,m_bk,15.48,completed,2026-06-02 12:01:00
+9,7,bank,27.00,completed,2026-06-10 15:10:00
+10,8,m_bk,17.00,completed,2026-06-15 13:00:00
+11,9,bank,8.97,canceled,2026-06-22 17:45:00
+12,10,cash,9.48,completed,2026-07-01 11:25:00
