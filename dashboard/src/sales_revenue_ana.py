@@ -1,8 +1,8 @@
 import streamlit as st
 import polars as pl
 
-
-URL = "postgresql://username:password@127.0.0.1:5432/donut_shop"
+# neon cloud url
+URL = "postgresql://neondb_owner:npg_eh0oxtKEmyS6@ep-gentle-frost-ayee265t-pooler.c-5.us-east-2.aws.neon.tech/donut_shop?sslmode=require&channel_binding=require"
 
 
 def load_data_from_db(query: str):
