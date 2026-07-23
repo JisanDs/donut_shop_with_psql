@@ -2,6 +2,8 @@
 
 This repository contains an end-to-end relational database platform paired with an object-oriented Python backend and a real-time Streamlit analytical dashboard. 
 
+**Click this link for see full dashboard:**[https://donutshopwithpsql-fkjregdgd2iyoqdotxtkfw.streamlit.app/]
+
 The primary objective of this project is to showcase production-grade software engineering, featuring **Advanced Relational Database Design**, **Server-Side Transaction Automation (Stored Procedures & Triggers)**, **Compiled C Native Extensions**, and a **High-Performance In-Memory Analytics Pipeline** utilizing Polars, ConnectorX, and Plotly.
 
 ---
